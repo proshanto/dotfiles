@@ -1,0 +1,7 @@
+# laravel function to create new project
+function laravel() {
+    if [ $(pwd) != "/var/www/" ]; then
+        cd /var/www/;
+    fi
+    composer create-project laravel/laravel $1 --prefer-dist
+}
