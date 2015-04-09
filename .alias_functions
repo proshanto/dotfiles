@@ -1,7 +1,68 @@
 # laravel function to create new project
-function laravel() {
-    if [ $(pwd) != "/var/www/" ]; then
-        cd /var/www/;
+
+# Usage laravelnew personal L5 or laravelnew work L5 
+# Here personal/work is the name of the directory and L5 is the name of the project
+
+function laravel5() {
+    projectDir="/var/www/projects"
+    vagrantDir="/home/vagrant/projects"
+    homesteadDir="/var/www/homestead32"
+
+    if [ $(pwd) != "$projectDir/$1/" ]; then
+        cd $projectDir/$1/;
     fi
-    composer create-project laravel/laravel $1 --prefer-dist
+    
+    dir=$(pwd)/$2
+    
+    clear
+    
+    echo "Creating New Laravel5 App"
+    
+    composer create-project laravel/laravel $2 --prefer-dist
+    
+    sudo chown -vR $(whoami):www-data $dir
+    
+    # sudo find $dir -type d -not -perm 775 -exec chmod -v 775 "{}" \;
+    
+    # sudo find $dir -type f -not -perm 664 -exec chmod -v 664 "{}" \;
+
+    sudo chmod -vR g+w $dir/storage/
+    
+    
+#    echo "Creating Virtual Host"
+    
+#    sudo cp /etc/apache2/sites-available/moushumi-knit.dev.conf /etc/apache2/sites-available/$2.dev.conf
+    
+#    sudo sed -i "s/ServerName.*/ServerName $2.dev/" /etc/apache2/sites-available/$2.dev.conf
+
+    # sed variable slash escape issue, so changed the separator. You can use any character as a separator http://ubuntuforums.org/showthread.php?t=1270429
+    
+#    sudo sed -i "s,DocumentRoot.*,DocumentRoot $dir/public," /etc/apache2/sites-available/$2.dev.conf
+
+#    sudo sed -i "s,<Directory /var/www.*,<Directory $dir/public>," /etc/apache2/sites-available/$2.dev.conf 
+
+#    sudo sed -i "s/moushumi-knit.log/$2.log/" /etc/apache2/sites-available/$2.dev.conf
+    
+#    echo "Enabling site..."
+#    sudo a2ensite $2.dev
+    
+#    echo "Restarting Apache2"
+#    sudo service apache2 restart
+    
+    clear
+    
+    echo -e "Adding Host File Entry\n"
+    # Host file entry
+    sudo sed -i "$s/server1204.dev/a 192.168.10.10 $2.dev" /etc/hosts
+    
+    echo -e "Adding Homestead File Entry\n"    
+    # Homestead entry    
+    sed -i "$s/sites:/a \    - map: $2.dev\n \     to: $vagrantDir/$1/$2/public" $homesteadDir/Homestead.yaml
+    
+    echo -e "Vagrant Provision for new additional site in homestead\n"
+    cd $homesteadDir
+    vagrant up && vagrant provision 
+    
+    clear
+    echo "All done. Now go to $2.dev and enjoy :)"
 }

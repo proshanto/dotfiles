@@ -45,13 +45,14 @@ ZSH_THEME="random"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git python composer zsh-syntax-highlighting)
+plugins=(zsh-syntax-highlighting history-substring-search common-aliases git python composer laravel4 laravel5 bower npm vagrant)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/bin:/home/proshanto/bin:/home/proshanto/PhpStorm-133.982/bin:/home/proshanto/.composer/vendor/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
+export PATH="/usr/local/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/proshanto/bin:/home/proshanto/PhpStorm-139.732/bin:/home/proshanto/.composer/vendor/bin"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -132,15 +133,12 @@ alias 'cp=cp -i'
 
 # User defined aliases
 
-source ~/.bash_aliases
+source ~/.aliases
+
+# Specific for every installation
+source ~/.aliases_local
+
+source ~/.alias_functions
 
 
-
-# Test Your Internet Speed
-#alias "speedtest=wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
-
-# cd into homestead & start vagrant
-#alias homestead='cd /var/www/homestead && vagrant up'
-
-# To start laravel homestead
-#alias vm='ssh vagrant@127.0.0.1 -p 2222'
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

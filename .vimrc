@@ -4,7 +4,12 @@ syntax on
 
 filetype plugin indent on
 
-colorscheme twilight256
+colorscheme lucius
+LuciusDarkLowContrast
+
+"Resolves conflict with terminal color schemes
+"http://stackoverflow.com/questions/4325682/vim-colorschemes-not-changing-background-color#answer-4326956
+set t_Co=256
 
 "Tab Stuff
 set tabstop=3
@@ -79,3 +84,6 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
+"to add spell checking and automatic wrapping at the recommended 72 columns to you commit messages
+"http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
+autocmd Filetype gitcommit setlocal spell textwidth=72

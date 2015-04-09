@@ -95,6 +95,10 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
+if [ -f ~/.aliases_local ]; then
+    . ~/.aliases_local
+fi
+
 # User-defined functions
 if [ -f ~/.alias_functions ]; then
     . ~/.alias_functions
@@ -109,3 +113,5 @@ fi
 export TERM=xterm-256color
 export LD_LIBRARY_PATH=/usr/local/lib
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

@@ -1,8 +1,5 @@
 # bash_aliases file for custom aliases.
 
-# Change directory to htdocs
-alias htdocs='cd /opt/lampp/htdocs/'
-
 # To show 30 most used commands from bash history
 alias mostused='cut -f1 -d" " .bash_history | sort | uniq -c | sort -nr | head -n 30'
 
@@ -12,41 +9,17 @@ alias update='sudo apt-get update'
 # Upgrade
 alias upgrade='sudo apt-get upgrade'
 
-# Ping 192.168.7.1-30 using nmap
-alias ks='nmap -sP 10.200.2.1-30'
-
 # Edit Alias
-alias aliasedit='sudo vim ~/.bash_aliases'
+alias aliasedit='sudo vim ~/.aliases'
 
 # Open directory, file etc. with 'gnome-open'. It can also be done with 'xdg-open'.
 alias open='gnome-open'
 
-# Windows C: Drive
-alias C:='cd /media/C:/'
-
-# Windows G: Drive
-alias G:='cd /media/G:/'
-
-# Windows Software Drive
-alias Software='cd /media/Software/'
-
-# Windows Music Drive
-alias Music='cd /media/Music/'
-
-# Windows Temp Drive
-alias Temp='cd /media/Temp/'
-
-# MateVpn Start
-alias matevpn='cd ~/Desktop/MateVPN/ && sudo openvpn MateVPN.ovpn'
-
 # SpeedTest
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 
-# Stop nginx and start apache
-alias nginx-apache='sudo service nginx stop && sudo service apache2 start'
-
 # cd into homestead & start vagrant
-alias homestead='cd /var/www/homestead32 && vagrant up'
+alias homestead32='cd /var/www/homestead32 && vagrant resume'
 
 # To start laravel homestead
 alias vm='ssh vagrant@127.0.0.1 -p 2222'
@@ -54,7 +27,13 @@ alias vm='ssh vagrant@127.0.0.1 -p 2222'
 # Copy your ssh key to clipboard
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 
+alias bower='noglob bower'
 
+alias sub='/usr/local/bin/sub'
+
+alias t='vendor/bin/phpunit'
+
+alias codecept='vendor/bin/codecept'
 
 ############################################
 
@@ -62,35 +41,21 @@ alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 
 alias aliases='printf "\nAlias Usage
 
-htdocs = Will change directory to opt/lampp/htdocs
-
 mostused = To show 30 most used commands from bash history
-
-st2 = Will start sublime text 2
-
-photoshop = Change Directory to Photoshop ~/.wine/drive_c/
 
 update = Will Update Package Index (sudo apt-get update)
 
 upgrade = Will Upgrade Package Index (sudo apt-get upgrade)
 
-ks = Ping 192.168.7.1-30 using nmap (nmap -A -sP 192.168.7.1-30)
-
-Edit = sudo nano ~/.bash_aliases
+Edit = sudo vim ~/.aliases
 
 open = Open directory, file etc. with 'gnome-open'. It can also be done with 'xdg-open'.
 
-C: =  Windows C: Drive
-
-G: = Windows G: Drive
-
-Software =  Windows Software Drive
-
-Music = Windows Music Drive
-
-Temp = Windows Temp Drive
-
-matevpn = MateVpn Start
-
 speedtest = Test Your Network Speed
+ 
+homestead32 = cd into homestead32 and boots up the box 
+
+vm = ssh into vagrant box
+
+sshkey = Copy your ssh key to clipboard
 "'
