@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Script for installing and setting up dotfiles
-# Usage: wget https://raw.githubusercontent.com/proshanto/dotfiles/master/setup.sh -O - | bash
-# or     curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+# Usage: wget https://raw.githubusercontent.com/proshanto/dotfiles/master/setup.sh -O setup.sh; chmod +x setup.sh; ./setup.sh
+# or     curl -L https://raw.githubusercontent.com/proshanto/dotfiles/master/setup.sh > setup.sh; chmod +x setup.sh; ./setup.sh
 
 # Update package list
 sudo apt-get update
@@ -37,10 +37,33 @@ wget "http://www.vim.org/scripts/download_script.php?src_id=23000" -O ~/.vim/col
 sudo apt-get install -y zsh
 wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
 
+# Backup existing files
+timestamp=`date +%Y-%m-%d_%H:%M:%S`
+
+if [ -f ~/.bashrc ]; then
+    echo -e "Found ~/.bashrc. Backing up to ~/.bashrc.${timestamp}\n";
+    mv ~/.bashrc ~/.bashrc.${timestamp};
+fi
+
+if [ -f ~/.zshrc ]; then
+    echo -e "Found ~/.zshrc. Backing up to ~/.zshrc.${timestamp}\n";
+    mv ~/.zshrc ~/.zshrc.${timestamp};
+fi
+
+if [ -f ~/.vimrc ]; then
+    echo -e "Found ~/.vimrc. Backing up to ~/.vimrc.${timestamp}\n";
+    mv ~/.vimrc ~/.vimrc.${timestamp};
+fi
+
+if [ -f ~/.gitconfig ]; then
+    echo -e "Found ~/.gitconfig. Backing up to ~/.gitconfig.${timestamp}\n";
+    mv ~/.gitconfig ~/.gitconfig.${timestamp};
+fi
+
+
 # download and overwrite files if already exists
 
 # bash
-rm -f ~/.bash_aliases # first remove default bash aliases
 wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.aliases -O ~/.aliases
 wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.alias_functions -O ~/.alias_functions
 wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.bashrc -O ~/.bashrc
@@ -53,3 +76,6 @@ wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.vimrc -O ~/.vi
 
 # zsh
 wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.zshrc -O ~/.zshrc
+
+# Create a file for local aliases
+touch ~/.aliases_local

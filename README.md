@@ -1,16 +1,16 @@
 My dotfiles
 ---
-It installs and sets up  vim, git, zsh and a profile for gnome terminal based on [tomorrow theme](https://github.com/chriskempson/tomorrow-theme/).
+It installs and sets up vim, git, zsh and a profile for gnome terminal based on [tomorrow theme](https://github.com/chriskempson/tomorrow-theme/).
 
 ### Automatic install
 ---
 **Using curl**
 ```shell
-curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+curl -L https://raw.githubusercontent.com/proshanto/dotfiles/master/setup.sh > setup.sh; chmod +x setup.sh; ./setup.sh
 ```
 **Using wget**
 ```shell
-wget https://raw.githubusercontent.com/proshanto/dotfiles/master/setup.sh -O - | bash
+wget https://raw.githubusercontent.com/proshanto/dotfiles/master/setup.sh -O setup.sh; chmod +x setup.sh; ./setup.sh
 ```
 ### Manual install
 ---
@@ -56,9 +56,9 @@ wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - 
 
 * Download and overwrite files if already exists
 
-    First remove default bash aliases `rm ~/.bash_aliases`
+    First take backup if you need to.
 
-    Download and create/replace these files
+    Downloads and create/replace these files
 ```shell
 wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.aliases -O ~/.aliases
 wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.alias_functions -O ~/.alias_functions
@@ -67,4 +67,8 @@ wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.gitconfig -O ~
 wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.vimrc -O ~/.vimrc
 wget https://raw.githubusercontent.com/proshanto/dotfiles/master/.zshrc -O ~/.zshrc
 ```
+
+* Finally create a file for local aliases
+`touch ~/.aliases_local`
+
 **And you're done !!! enjoy :)**
