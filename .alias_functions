@@ -8,61 +8,123 @@ function laravel5() {
     vagrantDir="/home/vagrant/projects"
     homesteadDir="/var/www/homestead32"
 
+    if [ $# -lt 2 ]; then
+        echo "Argument #1 should be personal/work and #2 should be the name of the project."
+        return 1
+    fi
+
     if [ $(pwd) != "$projectDir/$1/" ]; then
         cd $projectDir/$1/;
     fi
-    
+
     dir=$(pwd)/$2
     
     clear
-    
+
     echo "Creating New Laravel5 App"
-    
-    composer create-project laravel/laravel $2 --prefer-dist
-    
+
+    composer create-project laravel/laravel $2 --prefer-dist --verbose --profile
+
     sudo chown -vR $(whoami):www-data $dir
-    
+
     # sudo find $dir -type d -not -perm 775 -exec chmod -v 775 "{}" \;
-    
+
     # sudo find $dir -type f -not -perm 664 -exec chmod -v 664 "{}" \;
 
     sudo chmod -vR g+w $dir/storage/
-    
-    
+
+
 #    echo "Creating Virtual Host"
-    
+
 #    sudo cp /etc/apache2/sites-available/moushumi-knit.dev.conf /etc/apache2/sites-available/$2.dev.conf
-    
+
 #    sudo sed -i "s/ServerName.*/ServerName $2.dev/" /etc/apache2/sites-available/$2.dev.conf
 
     # sed variable slash escape issue, so changed the separator. You can use any character as a separator http://ubuntuforums.org/showthread.php?t=1270429
-    
+
 #    sudo sed -i "s,DocumentRoot.*,DocumentRoot $dir/public," /etc/apache2/sites-available/$2.dev.conf
 
 #    sudo sed -i "s,<Directory /var/www.*,<Directory $dir/public>," /etc/apache2/sites-available/$2.dev.conf 
 
 #    sudo sed -i "s/moushumi-knit.log/$2.log/" /etc/apache2/sites-available/$2.dev.conf
-    
+
 #    echo "Enabling site..."
 #    sudo a2ensite $2.dev
-    
+
 #    echo "Restarting Apache2"
 #    sudo service apache2 restart
-    
+
     clear
-    
+
     echo -e "Adding Host File Entry\n"
     # Host file entry
     sudo sed -i "$s/server1204.dev/a 192.168.10.10 $2.dev" /etc/hosts
-    
+
     echo -e "Adding Homestead File Entry\n"    
     # Homestead entry    
     sed -i "$s/sites:/a \    - map: $2.dev\n \     to: $vagrantDir/$1/$2/public" $homesteadDir/Homestead.yaml
-    
+
     echo -e "Vagrant Provision for new additional site in homestead\n"
     cd $homesteadDir
     vagrant up && vagrant provision 
-    
+
     clear
     echo "All done. Now go to $2.dev and enjoy :)"
+}
+
+function laravel5!() {
+    projectDir="/var/www/projects"
+    vagrantDir="/home/vagrant/projects"
+    homesteadDir="/var/www/homestead32"
+
+    if [ $# -lt 2 ]; then
+        echo -e "Are you fucking kidding me? I just saved you from destroying your life's work <3 ProMan\nArgument #1 should be personal/work and #2 should be the name of the project."
+        return 1
+    fi
+
+    if [ $(pwd) != "$projectDir/$1" ]; then
+        cd $projectDir/$1;
+    fi
+
+    dir=$(pwd)/$2
+
+    clear
+
+    echo "Deleting $2 Laravel5 App"
+
+    rm -vrf $dir
+
+    echo -e "Deleting Host File Entry\n"
+
+    # Delete entry from host file
+    sudo sed -i "/$2/d" /etc/hosts
+
+    # Delete all blank lines
+    # http://superuser.com/questions/485188/using-sed-how-can-i-delete-all-blank-lines#answer-485193
+    #sudo sed -i '/^$/d' /etc/hosts
+
+    echo -e "Deleting Homestead File Entry\n"
+
+    sed -i "/$2/d" $homesteadDir/Homestead.yaml
+
+    echo -e "Vagrant Provision for deleting site $2 in homestead\n"
+    cd $homesteadDir
+    vagrant up && vagrant provision
+
+    clear
+    echo "All done, enjoy :)"
+}
+
+function cdProject() {
+    projectDir="/var/www/projects"
+
+    if [ $# -lt 2 ]; then
+        echo -e "Argument #1 should be personal or work\n"
+        echo -e "Argument #2 should be the name of the directory to cd into from personal or work directory."
+        return 1
+    fi
+
+    if [ $(pwd) != "$projectDir/$1/$2" ]; then
+        cd $projectDir/$1/$2;
+    fi
 }

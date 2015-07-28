@@ -45,13 +45,13 @@ ZSH_THEME="random"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(zsh-syntax-highlighting history-substring-search common-aliases git python composer laravel4 laravel5 bower npm vagrant)
+plugins=(zsh-syntax-highlighting history-substring-search common-aliases git python tmux colorize composer laravel4 laravel5 bower npm vagrant chucknorris)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/proshanto/bin:/home/proshanto/PhpStorm-139.732/bin:/home/proshanto/.composer/vendor/bin"
+export PATH="/usr/local/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$HOME/bin:$HOME/PhpStorm-139.732/bin:$HOME/.composer/vendor/bin:$HOME/.rvm/bin"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -140,5 +140,4 @@ source ~/.aliases_local
 
 source ~/.alias_functions
 
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+chuck_cow

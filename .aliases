@@ -35,6 +35,11 @@ alias t='vendor/bin/phpunit'
 
 alias codecept='vendor/bin/codecept'
 
+alias art='php artisan'
+
+# alias for opening git plugin file to see git shortcut commands
+alias gpdoc='vim ~/.oh-my-zsh/plugins/git/git.plugin.zsh'
+
 ############################################
 
 # List Every Aliases
