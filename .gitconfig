@@ -14,4 +14,8 @@
 [diff]
 	tool = meld
 [difftool]
-	prompt = no
+	prompt = false
+[mergetool]
+	prompt = false
+[push]
+	default = simple
