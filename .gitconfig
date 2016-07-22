@@ -7,6 +7,10 @@
 	editor = vim
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+   untracked = "ls-files --others --exclude-standard"
+   modified = "ls-files --modified"
+	add-untracked = "!git add $(git untracked)"
+	add-modified = "!git add $(git modified)"
 [color]
 	ui = true
 [merge]
@@ -15,6 +19,8 @@
 	tool = meld
 [difftool]
 	prompt = false
+[difftool "meld"]
+   cmd = meld "$LOCAL" "$REMOTE"
 [mergetool]
 	prompt = false
 [push]

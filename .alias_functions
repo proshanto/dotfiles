@@ -116,7 +116,7 @@ function laravel5!() {
 }
 
 function cdProject() {
-    projectDir="/var/www/projects"
+    projectDir="/home/proman/Code/Projects"
 
     if [ $# -lt 2 ]; then
         echo -e "Argument #1 should be personal or work\n"

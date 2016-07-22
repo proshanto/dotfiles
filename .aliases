@@ -1,7 +1,7 @@
 # bash_aliases file for custom aliases.
 
 # To show 30 most used commands from bash history
-alias mostused='cut -f1 -d" " .bash_history | sort | uniq -c | sort -nr | head -n 30'
+alias mostused='cut -f1 -d" " .zsh_history | sort | uniq -c | sort -nr | head -n 30'
 
 # Update
 alias update='sudo apt-get update'
@@ -18,14 +18,8 @@ alias open='gnome-open'
 # SpeedTest
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 
-# cd into homestead & start vagrant
-alias homestead32='cd /var/www/homestead32 && vagrant resume'
-
 # To start laravel homestead
 alias vm='ssh vagrant@127.0.0.1 -p 2222'
-
-# Copy your ssh key to clipboard
-alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 
 alias bower='noglob bower'
 
@@ -40,6 +34,8 @@ alias art='php artisan'
 # alias for opening git plugin file to see git shortcut commands
 alias gpdoc='vim ~/.oh-my-zsh/plugins/git/git.plugin.zsh'
 
+# copy terminal std input to clipboard
+alias clip='xclip -selection clipboard'
 ############################################
 
 # List Every Aliases
@@ -61,6 +57,4 @@ speedtest = Test Your Network Speed
 homestead32 = cd into homestead32 and boots up the box 
 
 vm = ssh into vagrant box
-
-sshkey = Copy your ssh key to clipboard
 "'
