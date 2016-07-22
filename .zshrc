@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="random"
+ZSH_THEME="tjkirch_mod"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -30,14 +30,14 @@ ZSH_THEME="random"
 # DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment following line if you want to  shown in the command execution time stamp 
+# Uncomment following line if you want to  shown in the command execution time stamp
 # in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
 # yyyy-mm-dd
 # HIST_STAMPS="mm/dd/yyyy"
@@ -45,13 +45,13 @@ ZSH_THEME="random"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(zsh-syntax-highlighting history-substring-search common-aliases git git-extras python tmux colorize composer laravel4 laravel5 bower npm vagrant chucknorris)
+plugins=(zsh-syntax-highlighting history-substring-search common-aliases battery git git-extras python tmux composer laravel4 laravel5 bower npm vagrant colorize)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$PATH:/usr/local/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$HOME/bin:$HOME/PhpStorm-139.732/bin:$HOME/.composer/vendor/bin:$HOME/.rvm/bin"
+export PATH="$PATH:/usr/local/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$HOME/bin:$HOME/.composer/vendor/bin:$HOME/.rvm/rubies/ruby-2.1.4/bin:$HOME/.rvm/bin:$HOME/PhpStorm-139.1348/bin:$HOME/npm-global/bin"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -95,7 +95,7 @@ setopt hist_ignore_all_dups     # no duplicate
 unsetopt hist_ignore_space      # ignore space prefixed commands
 setopt hist_reduce_blanks       # trim blanks
 setopt hist_verify              # show before executing history commands
-setopt inc_append_history       # add commands as they are typed, don't wait until shell exit 
+setopt inc_append_history       # add commands as they are typed, don't wait until shell exit
 setopt share_history            # share hist between sessions
 setopt bang_hist                # !keyword
 
@@ -131,15 +131,25 @@ alias 'rm=rm -i'
 alias 'mv=mv -i'
 alias 'cp=cp -i'
 
-# User defined aliases
+# USER DEFINED AREA
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
+fi
 
-source ~/.aliases
+if [ -f ~/.alias_functions ]; then
+    . ~/.alias_functions
+fi
 
 # Specific for every installation
-source ~/.aliases_local
-
-source ~/.alias_functions
+if [ -f ~/.aliases_local ]; then
+    . ~/.aliases_local
+fi
 
 export EDITOR='vim'
 
-chuck_cow
+export LC_ALL="en_US.UTF-8"
+
+# virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Code/Projects/Python
+source /usr/local/bin/virtualenvwrapper.sh
